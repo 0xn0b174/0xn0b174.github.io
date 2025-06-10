@@ -1,5 +1,12 @@
-title: 0xn0b174
-#logo: /assets/img/headshot_circle.png
-#description: text below image
-#show_downloads: true
 theme: jekyll-theme-hacker
+title: 0xn0b174
+description: Personal blog of 0xn0b174
+author:
+  name: 0xn0b174
+  email: 0xn0b174@example.com
+baseurl: ""
+url: "https://0xn0b174.github.io"
+plugins:
+  - jekyll-feed
+#logo: /assets/img/headshot_circle.png
+#show_downloads: true
